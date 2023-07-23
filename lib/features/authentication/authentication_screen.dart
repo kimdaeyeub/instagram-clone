@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/gaps.dart';
 import 'package:instagram_clone/constants/sizes.dart';
-import 'package:instagram_clone/features/authentication/email_confirmation_screen.dart';
+import 'package:instagram_clone/features/authentication/signin_screen.dart';
+import 'package:instagram_clone/features/authentication/login_screen.dart';
 import 'package:instagram_clone/features/authentication/widgets/auth_button.dart';
 
 class AuthenticationScreen extends StatefulWidget {
@@ -16,7 +17,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   void _onMoveEmailConfirmationScreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const EmailConfirmationScreen(),
+        builder: (context) => const SignInScreen(),
+      ),
+    );
+  }
+
+  //로그인페이지로 이동
+  void _onLoginTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
       ),
     );
   }
@@ -49,22 +59,25 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   ),
                 ),
                 Gaps.v20,
-                FractionallySizedBox(
-                  widthFactor: 1,
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: Sizes.size20,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: Colors.transparent,
-                    ),
-                    child: const Text(
-                      "Log in",
-                      style: TextStyle(
-                        fontSize: Sizes.size16,
-                        color: Color(0xFF4294F6),
-                        fontWeight: FontWeight.w500,
+                GestureDetector(
+                  onTap: _onLoginTap,
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: Sizes.size20,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      child: const Text(
+                        "Log in",
+                        style: TextStyle(
+                          fontSize: Sizes.size16,
+                          color: Color(0xFF4294F6),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),

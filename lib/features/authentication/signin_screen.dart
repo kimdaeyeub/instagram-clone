@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/sizes.dart';
+import 'package:instagram_clone/features/authentication/login_screen.dart';
+import 'package:instagram_clone/features/authentication/widgets/auth_bottom_app_bar.dart';
 import 'package:instagram_clone/features/authentication/widgets/auth_button.dart';
+import 'package:instagram_clone/features/tutorials/tutorial_screen.dart';
 
 import '../../constants/gaps.dart';
-import 'auth_info.dart';
 
-class EmailConfirmationScreen extends StatefulWidget {
-  const EmailConfirmationScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<EmailConfirmationScreen> createState() =>
-      _EmailConfirmationScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _EmailConfirmationScreenState extends State<EmailConfirmationScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
   final String _confirmNumber = "1234";
@@ -21,8 +22,6 @@ class _EmailConfirmationScreenState extends State<EmailConfirmationScreen> {
   late String _password = "";
 
   // 다음 페이지로 이동
-  // _email의 값을 검사
-  // button을 활성화
   void _onNextTap() {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
@@ -31,14 +30,24 @@ class _EmailConfirmationScreenState extends State<EmailConfirmationScreen> {
     }
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) => const AuthInfoScreen(),
+        builder: (context) => const TutorialsScreen(),
       ),
       (route) => false,
     );
   }
 
+  // 여백 클릭시 키보드 사라짐 구현
   void _unFocusTextField() {
     FocusScope.of(context).unfocus();
+  }
+
+  //하단의 '로그인'누를시 로그인 페이지로 이동
+  void _onLoginTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+    );
   }
 
   @override
@@ -57,32 +66,10 @@ class _EmailConfirmationScreenState extends State<EmailConfirmationScreen> {
     return GestureDetector(
       onTap: _unFocusTextField,
       child: Scaffold(
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.grey.shade200,
-          padding: const EdgeInsets.symmetric(
-            vertical: Sizes.size28,
-          ),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "계정이 이미 있으신가요?",
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Gaps.h8,
-              Text(
-                "로그인",
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF4294F6),
-                ),
-              ),
-            ],
-          ),
+        bottomNavigationBar: AuthBottomAppBar(
+          text: "계정이 이미 있으신가요?",
+          buttonText: "로그인",
+          onPressedFunction: _onLoginTap,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -241,6 +228,9 @@ class _EmailConfirmationScreenState extends State<EmailConfirmationScreen> {
                             ),
                             validator: (String? value) {
                               if (value!.isNotEmpty) {
+                                if (value.length < 7) {
+                                  return "비밀번호가 너무 짧습니다.";
+                                }
                                 return null;
                               } else {
                                 return "필수 입력란입니다.";

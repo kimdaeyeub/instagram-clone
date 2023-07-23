@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/authentication/authentication_screen.dart';
+import 'package:instagram_clone/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
   runApp(const Instagram());
@@ -12,8 +12,10 @@ class Instagram extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const AuthenticationScreen(),
+      home: const MainNavigationScreen(),
       theme: ThemeData(
+        splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.transparent,
         textTheme: Typography.blackCupertino,
         appBarTheme: const AppBarTheme(
           color: Colors.transparent,
