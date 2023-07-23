@@ -16,6 +16,7 @@ class Instagram extends StatelessWidget {
       theme: ThemeData(
         splashFactory: NoSplash.splashFactory,
         splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         textTheme: Typography.blackCupertino,
         appBarTheme: const AppBarTheme(
           color: Colors.transparent,

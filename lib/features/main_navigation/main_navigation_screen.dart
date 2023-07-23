@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:instagram_clone/constants/sizes.dart';
+import 'package:instagram_clone/features/home/home_screen.dart';
+import 'package:instagram_clone/features/profile/profile_screen.dart';
+import 'package:instagram_clone/features/search/search_screen.dart';
+import 'package:instagram_clone/features/upload/upload_screen.dart';
+import 'package:instagram_clone/features/video/video_screen.dart';
+
+import '../../constants/sizes.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -23,6 +29,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedIconTheme: const IconThemeData(
@@ -37,24 +44,63 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           BottomNavigationBarItem(
             icon: FaIcon(
               FontAwesomeIcons.house,
+              size: Sizes.size28,
             ),
             label: "Home",
           ),
           BottomNavigationBarItem(
             icon: FaIcon(
               FontAwesomeIcons.magnifyingGlass,
+              size: Sizes.size28,
             ),
             label: "Search",
           ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.squarePlus,
+              size: Sizes.size28,
+            ),
+            label: "Video",
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.clapperboard,
+              size: Sizes.size28,
+            ),
+            label: "Video",
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.circleUser,
+              size: Sizes.size28,
+            ),
+            label: "Video",
+          ),
         ],
       ),
-      body: Center(
-        child: Text(
-          _selectedIndex.toString(),
-          style: const TextStyle(
-            fontSize: Sizes.size48,
+      body: Stack(
+        children: [
+          Offstage(
+            offstage: _selectedIndex != 0,
+            child: const HomeScreen(),
           ),
-        ),
+          Offstage(
+            offstage: _selectedIndex != 1,
+            child: const SearchScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 2,
+            child: const UploadScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 3,
+            child: const VideoScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 4,
+            child: const ProfileScreen(),
+          ),
+        ],
       ),
     );
   }
