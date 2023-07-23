@@ -25,7 +25,7 @@ class InstagramPost extends StatelessWidget {
                   ),
                   Gaps.h10,
                   Text(
-                    "김대엽",
+                    "danbi_babo",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -37,8 +37,12 @@ class InstagramPost extends StatelessWidget {
           ),
         ),
         Gaps.v12,
-        Image.asset(
-          "assets/images/placeholder.jpg",
+        // Image.asset(
+        //   "assets/images/placeholder.jpg",
+        //   fit: BoxFit.fitWidth,
+        // ),
+        Image.network(
+          "https://cdn.slist.kr/news/photo/202303/434258_701143_4115.jpg",
           fit: BoxFit.fitWidth,
         ),
         Gaps.v20,

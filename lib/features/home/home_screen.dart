@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: Sizes.size12,
+                  horizontal: Sizes.size16,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,8 +75,22 @@ class HomeScreen extends StatelessWidget {
                         11,
                         1
                       ]) ...[
-                        const CircleAvatar(
-                          radius: Sizes.size36,
+                        const Column(
+                          children: [
+                            CircleAvatar(
+                              radius: Sizes.size36,
+                              foregroundImage: NetworkImage(
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYKGyhfK2RupYNvvl24p26K3AFsWCtvetNqg&usqp=CAU",
+                              ),
+                            ),
+                            Gaps.v4,
+                            Opacity(
+                              opacity: 0.6,
+                              child: Text(
+                                "danbi_babo",
+                              ),
+                            ),
+                          ],
                         ),
                         Gaps.h6,
                       ]
@@ -89,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                 thickness: 2,
                 color: Colors.grey.shade300,
               ),
-              Gaps.v20,
+              Gaps.v14,
               const InstagramPost(),
               const InstagramPost(),
             ],
