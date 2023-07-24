@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constants/gaps.dart';
 import 'package:instagram_clone/constants/sizes.dart';
+import 'package:instagram_clone/features/chat/chat_screen.dart';
 import 'package:instagram_clone/features/home/widgets/post.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  void _onMoveChatScreen(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ChatScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +23,14 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: Sizes.size16,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Instagram",
                       style: TextStyle(
                         fontFamily: "LogoFont",
@@ -30,14 +39,17 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        FaIcon(
+                        const FaIcon(
                           FontAwesomeIcons.heart,
                           size: Sizes.size24,
                         ),
                         Gaps.h20,
-                        FaIcon(
-                          FontAwesomeIcons.paperPlane,
-                          size: Sizes.size24,
+                        GestureDetector(
+                          onTap: () => _onMoveChatScreen(context),
+                          child: const FaIcon(
+                            FontAwesomeIcons.paperPlane,
+                            size: Sizes.size24,
+                          ),
                         )
                       ],
                     )
@@ -87,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                             Opacity(
                               opacity: 0.6,
                               child: Text(
-                                "danbi_babo",
+                                "asd_zx",
                               ),
                             ),
                           ],

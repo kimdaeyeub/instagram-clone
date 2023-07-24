@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constants/gaps.dart';
+import 'package:instagram_clone/features/home/widgets/comments_modal.dart';
 
 import '../../../constants/sizes.dart';
 
 class InstagramPost extends StatelessWidget {
   const InstagramPost({super.key});
+
+  void _onTapAllComments(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) => Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: const CommentsModal(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +40,13 @@ class InstagramPost extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: Sizes.size24,
+                    foregroundImage: AssetImage(
+                      "assets/images/placeholder.jpg",
+                    ),
                   ),
                   Gaps.h10,
                   Text(
-                    "danbi_babo",
+                    "sadasd",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -46,13 +67,14 @@ class InstagramPost extends StatelessWidget {
           fit: BoxFit.fitWidth,
         ),
         Gaps.v20,
-        const Padding(
-          padding: EdgeInsets.symmetric(
+        Padding(
+          padding: const EdgeInsets.symmetric(
             horizontal: Sizes.size16,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -79,7 +101,7 @@ class InstagramPost extends StatelessWidget {
                 ],
               ),
               Gaps.v10,
-              Row(
+              const Row(
                 children: [
                   Text(
                     "좋아요",
@@ -99,7 +121,7 @@ class InstagramPost extends StatelessWidget {
                 ],
               ),
               Gaps.v8,
-              Row(
+              const Row(
                 children: [
                   Text(
                     "kimdaeyeub",
@@ -112,10 +134,113 @@ class InstagramPost extends StatelessWidget {
                     "응아아아악",
                   )
                 ],
-              )
+              ),
+              Gaps.v10,
+              GestureDetector(
+                onTap: () => _onTapAllComments(context),
+                child: const Opacity(
+                  opacity: 0.4,
+                  child: Text(
+                    "뎃글 11개 모두 보기",
+                  ),
+                ),
+              ),
+              Gaps.v4,
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "sadasd",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Gaps.h8,
+                      Text(
+                        "으아아아악",
+                      ),
+                    ],
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.heart,
+                    size: Sizes.size12,
+                  ),
+                ],
+              ),
+              Gaps.v4,
+              IntrinsicHeight(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        VerticalDivider(
+                          thickness: 2,
+                          width: 40,
+                          color: Colors.grey.shade300,
+                        ),
+                        const Text(
+                          "sadasd",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Gaps.h8,
+                        const Text(
+                          "으아아아악",
+                        ),
+                      ],
+                    ),
+                    const FaIcon(
+                      FontAwesomeIcons.heart,
+                      size: Sizes.size12,
+                    ),
+                  ],
+                ),
+              ),
+              Gaps.v10,
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     const Row(
+              //       children: [
+              //         CircleAvatar(
+              //           radius: Sizes.size16,
+              //         ),
+              //         Gaps.h4,
+              //         Opacity(
+              //           opacity: 0.4,
+              //           child: Text(
+              //             "댓글 달기...",
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     Row(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         const Text(
+              //           "❤️",
+              //         ),
+              //         const Text(
+              //           "🙌",
+              //         ),
+              //         FaIcon(
+              //           FontAwesomeIcons.plus,
+              //           color: Colors.grey.shade300,
+              //           size: Sizes.size16,
+              //         ),
+              //       ],
+              //     )
+              //   ],
+              // )
             ],
           ),
-        )
+        ),
+        Gaps.v12,
       ],
     );
   }

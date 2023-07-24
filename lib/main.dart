@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:instagram_clone/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
@@ -10,6 +11,7 @@ class Instagram extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const MainNavigationScreen(),
