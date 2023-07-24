@@ -12,16 +12,8 @@ class InstagramPost extends StatelessWidget {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
-      builder: (context) => Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        child: const CommentsModal(),
-      ),
+      isScrollControlled: true,
+      builder: (context) => const CommentsModal(),
     );
   }
 

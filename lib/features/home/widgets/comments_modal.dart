@@ -3,83 +3,152 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constants/gaps.dart';
 
 import '../../../constants/sizes.dart';
+import 'comments_tile.dart';
 
-class CommentsModal extends StatelessWidget {
+class CommentsModal extends StatefulWidget {
   const CommentsModal({super.key});
 
   @override
+  State<CommentsModal> createState() => _CommentsModalState();
+}
+
+class _CommentsModalState extends State<CommentsModal> {
+  bool _isFocus = false;
+  late TextEditingController _textEditingController;
+  String _inputText = "";
+
+  void _unFocus(BuildContext context) {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onTap() {
+    setState(() {
+      _isFocus = true;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = TextEditingController();
+    _textEditingController.addListener(() {
+      _inputText = _textEditingController.text;
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        actions: const [
-          Center(
-            child: FaIcon(
-              FontAwesomeIcons.paperPlane,
-            ),
-          ),
-          FaIcon(
-            FontAwesomeIcons.paperPlane,
-            color: Colors.transparent,
-          ),
-        ],
-        automaticallyImplyLeading: false,
-        title: const Text(
-          "댓글",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+    final size = MediaQuery.of(context).size;
+    return GestureDetector(
+      onTap: () => _unFocus(context),
+      child: Container(
+        height: _isFocus ? size.height * 0.85 : size.height * 0.6,
+        // height: size.height,
+        clipBehavior: Clip.hardEdge,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
         ),
-      ),
-      body: const Column(
-        children: [
-          ListTile(
-            leading: CircleAvatar(
-              radius: 26,
-              foregroundImage: AssetImage("assets/images/placeholder.jpg"),
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            actions: const [
+              Center(
+                child: FaIcon(
+                  FontAwesomeIcons.paperPlane,
+                ),
+              ),
+              FaIcon(
+                FontAwesomeIcons.paperPlane,
+                color: Colors.transparent,
+              ),
+            ],
+            automaticallyImplyLeading: false,
+            title: const Text(
+              "댓글",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            title: Row(
-              children: [
-                Text(
-                  "asx_sd",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: Sizes.size12 + Sizes.size2,
+          ),
+          body: Stack(
+            children: [
+              const SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: Sizes.size80 + Sizes.size52,
+                  ),
+                  child: Column(
+                    children: [
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                      CommentsTile(),
+                    ],
                   ),
                 ),
-                Gaps.h4,
-                Opacity(
-                  opacity: 0.4,
-                  child: Text(
-                    "4시간전",
-                    style: TextStyle(
-                      fontSize: Sizes.size12 + Sizes.size2,
+              ),
+              Positioned(
+                bottom: 0,
+                width: MediaQuery.of(context).size.width,
+                child: BottomAppBar(
+                  elevation: 1,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: Sizes.size20,
+                      horizontal: Sizes.size12,
+                    ),
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 25,
+                          foregroundImage:
+                              AssetImage("assets/images/placeholder.jpg"),
+                        ),
+                        Gaps.h10,
+                        Expanded(
+                          child: TextField(
+                            controller: _textEditingController,
+                            onTap: _onTap,
+                            decoration: InputDecoration(
+                              suffix: _inputText.isEmpty
+                                  ? null
+                                  : Text(
+                                      "게시",
+                                      style: TextStyle(
+                                        color: Colors.blue.shade300,
+                                      ),
+                                    ),
+                              isDense: true,
+                              hintText: "댓글 달기...",
+                              filled: true,
+                              fillColor: Colors.grey.shade200,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(
+                                  Sizes.size10,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                )
-              ],
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gaps.v10,
-                Text(
-                  "The height of the VerticalDivider in Flutter can be controlled by adjusting the height of its parent widget, such as a Container or a Row.",
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
-                Gaps.v12,
-                Opacity(
-                  opacity: 0.4,
-                  child: Text(
-                    "답글달기",
-                  ),
-                ),
-              ],
-            ),
-            trailing: FaIcon(FontAwesomeIcons.heart),
-          )
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
