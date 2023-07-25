@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constants/gaps.dart';
 import 'package:instagram_clone/constants/sizes.dart';
 import 'package:instagram_clone/features/chat/chat_screen.dart';
-import 'package:instagram_clone/features/home/widgets/post.dart';
+import 'package:instagram_clone/features/common/widgets/post.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

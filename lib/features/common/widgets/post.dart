@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constants/gaps.dart';
-import 'package:instagram_clone/features/home/widgets/comments_modal.dart';
+import 'package:instagram_clone/features/common/widgets/comments_modal.dart';
 
 import '../../../constants/sizes.dart';
 
@@ -50,10 +50,6 @@ class InstagramPost extends StatelessWidget {
           ),
         ),
         Gaps.v12,
-        // Image.asset(
-        //   "assets/images/placeholder.jpg",
-        //   fit: BoxFit.fitWidth,
-        // ),
         Image.network(
           "https://cdn.slist.kr/news/photo/202303/434258_701143_4115.jpg",
           fit: BoxFit.fitWidth,

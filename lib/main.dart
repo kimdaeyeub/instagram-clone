@@ -11,7 +11,6 @@ class Instagram extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const MainNavigationScreen(),
@@ -24,6 +23,7 @@ class Instagram extends StatelessWidget {
           color: Colors.transparent,
           elevation: 0,
           foregroundColor: Colors.black,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
       ),
     );

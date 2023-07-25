@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constants/gaps.dart';
+import 'package:instagram_clone/features/chat/chat_screen.dart';
 
 import '../../../constants/sizes.dart';
 import 'comments_tile.dart';
@@ -25,6 +26,14 @@ class _CommentsModalState extends State<CommentsModal> {
     setState(() {
       _isFocus = true;
     });
+  }
+
+  void _onMoveChatScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ChatScreen(),
+      ),
+    );
   }
 
   @override
@@ -55,13 +64,16 @@ class _CommentsModalState extends State<CommentsModal> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            actions: const [
+            actions: [
               Center(
-                child: FaIcon(
-                  FontAwesomeIcons.paperPlane,
+                child: GestureDetector(
+                  onTap: _onMoveChatScreen,
+                  child: const FaIcon(
+                    FontAwesomeIcons.paperPlane,
+                  ),
                 ),
               ),
-              FaIcon(
+              const FaIcon(
                 FontAwesomeIcons.paperPlane,
                 color: Colors.transparent,
               ),

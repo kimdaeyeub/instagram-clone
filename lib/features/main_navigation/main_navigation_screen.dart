@@ -18,6 +18,7 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
+// TODO
   //BottomNavigation클릭시 항목이동
   void _onTapBottomNavigation(int value) {
     setState(() {
