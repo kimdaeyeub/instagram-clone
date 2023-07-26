@@ -22,6 +22,7 @@ class SearchScreen extends StatelessWidget {
         title: const CupertinoSearchTextField(),
       ),
       body: GridView.builder(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           mainAxisSpacing: 2,

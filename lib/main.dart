@@ -25,6 +25,9 @@ class Instagram extends StatelessWidget {
           foregroundColor: Colors.black,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
+        tabBarTheme: const TabBarTheme(
+          indicatorColor: Colors.black,
+        ),
       ),
     );
   }

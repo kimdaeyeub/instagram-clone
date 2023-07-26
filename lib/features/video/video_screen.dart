@@ -1,17 +1,44 @@
 import 'package:flutter/material.dart';
-import '../../constants/sizes.dart';
 
-class VideoScreen extends StatelessWidget {
+class VideoScreen extends StatefulWidget {
   const VideoScreen({super.key});
 
   @override
+  State<VideoScreen> createState() => _VideoScreenState();
+}
+
+class _VideoScreenState extends State<VideoScreen> {
+  final List<Color> _colors = [
+    Colors.teal,
+    Colors.red,
+    Colors.deepPurple,
+    Colors.amber,
+    Colors.teal,
+    Colors.red,
+    Colors.deepPurple,
+    Colors.amber,
+    Colors.deepPurple,
+    Colors.amber,
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "Video",
-          style: TextStyle(
-            fontSize: Sizes.size44,
+    return Scaffold(
+      body: SafeArea(
+        child: PageView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) => Container(
+            color: _colors[index],
+            child: Center(
+              child: Text(
+                "$index",
+                style: const TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ),
       ),

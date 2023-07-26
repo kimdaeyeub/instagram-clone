@@ -50,10 +50,18 @@ class InstagramPost extends StatelessWidget {
           ),
         ),
         Gaps.v12,
-        Image.network(
-          "https://cdn.slist.kr/news/photo/202303/434258_701143_4115.jpg",
+        const FadeInImage(
           fit: BoxFit.fitWidth,
+          //TODO
+          // 그냥 하얀 색의 사진을 placeholder에 넣을 것
+          placeholder: AssetImage("assets/images/placeholder.jpg"),
+          image: NetworkImage(
+              "https://cdn.slist.kr/news/photo/202303/434258_701143_4115.jpg"),
         ),
+        // Image.network(
+        //   "https://cdn.slist.kr/news/photo/202303/434258_701143_4115.jpg",
+        //   fit: BoxFit.fitWidth,
+        // ),
         Gaps.v20,
         Padding(
           padding: const EdgeInsets.symmetric(
