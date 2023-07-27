@@ -5,7 +5,11 @@ import 'package:instagram_clone/constants/sizes.dart';
 import 'package:instagram_clone/features/profile/widgets/persistent_header.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final bool isCurrentTab;
+  const ProfileScreen({
+    super.key,
+    required this.isCurrentTab,
+  });
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();

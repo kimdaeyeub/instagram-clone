@@ -16,11 +16,32 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
+  final GlobalKey<NavigatorState> _searchKey = GlobalKey<NavigatorState>();
   int _selectedIndex = 0;
+  final bool _onMoveTopScreen = false;
+  late final ScrollController _homeScrollController;
+  late final ScrollController _searcScrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeScrollController = ScrollController();
+    _searcScrollController = ScrollController();
+    _scrollControllers.addAll([_homeScrollController, _searcScrollController]);
+  }
+
+  final List<ScrollController> _scrollControllers = [];
 
 // TODO
   //BottomNavigation클릭시 항목이동
   void _onTapBottomNavigation(int value) {
+    if (_selectedIndex == value) {
+      _scrollControllers[value].animateTo(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.linear,
+      );
+    }
     setState(() {
       _selectedIndex = value;
     });
@@ -83,15 +104,29 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: const HomeScreen(),
+            child: HomeScreen(
+              isCurrentTab: _selectedIndex == 0,
+              scrollController: _homeScrollController,
+            ),
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: const SearchScreen(),
+            // child: const SearchScreen(),
+            child: Navigator(
+              key: _searchKey,
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => SearchScreen(
+                  isCurrentTab: _selectedIndex == 1,
+                  scrollController: _searcScrollController,
+                ),
+              ),
+            ),
           ),
           Offstage(
             offstage: _selectedIndex != 2,
-            child: const UploadScreen(),
+            child: UploadScreen(
+              isCurrentTab: _selectedIndex == 2,
+            ),
           ),
           Offstage(
             offstage: _selectedIndex != 3,
@@ -99,7 +134,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: const ProfileScreen(),
+            child: ProfileScreen(
+              isCurrentTab: _selectedIndex == 4,
+            ),
           ),
         ],
       ),

@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/search/search_detail_screen.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+  final bool isCurrentTab;
+  final ScrollController scrollController;
+  const SearchScreen({
+    super.key,
+    required this.isCurrentTab,
+    required this.scrollController,
+  });
 
   void _onMoveDetailScreen(BuildContext context) {
     //이동을 하여도 BottomNavigationBar가 유지되도록 수정하여야 함.
@@ -22,6 +28,7 @@ class SearchScreen extends StatelessWidget {
         title: const CupertinoSearchTextField(),
       ),
       body: GridView.builder(
+        controller: scrollController,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,

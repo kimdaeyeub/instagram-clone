@@ -6,7 +6,13 @@ import 'package:instagram_clone/features/chat/chat_screen.dart';
 import 'package:instagram_clone/features/common/widgets/post.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final bool isCurrentTab;
+  final ScrollController scrollController;
+  const HomeScreen({
+    super.key,
+    required this.isCurrentTab,
+    required this.scrollController,
+  });
 
   void _onMoveChatScreen(BuildContext context) {
     Navigator.of(context).push(
@@ -21,6 +27,7 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
+          controller: scrollController,
           child: Column(
             children: [
               Padding(
@@ -116,6 +123,12 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.grey.shade300,
               ),
               Gaps.v14,
+              const InstagramPost(),
+              const InstagramPost(),
+              const InstagramPost(),
+              const InstagramPost(),
+              const InstagramPost(),
+              const InstagramPost(),
               const InstagramPost(),
               const InstagramPost(),
             ],

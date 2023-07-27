@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import '../../constants/sizes.dart';
 
 class UploadScreen extends StatelessWidget {
-  const UploadScreen({super.key});
+  final bool isCurrentTab;
+  const UploadScreen({
+    super.key,
+    required this.isCurrentTab,
+  });
 
   @override
   Widget build(BuildContext context) {
